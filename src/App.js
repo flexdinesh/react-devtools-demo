@@ -1,18 +1,25 @@
-import React from 'react'
-import './App.css'
+import React from "react";
+import "./App.css";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
-import LoginForm from './login-form/LoginForm'
-import Timer from './timer/Timer'
-import ArticleWrapper from './article/ArticleWrapper'
+import Header from "./components/Header";
+import LoginFormWithHooks from "./components/LoginForm/LoginFormWithHooks";
+import ArticleThemeWrapper from "./components/Article/ArticleWrapper";
 
-function App () {
+function App() {
   return (
-    <div>
-      <LoginForm />
-      <Timer />
-      <ArticleWrapper />
-    </div>
-  )
+    <ThemeProvider>
+      {({ theme }) => (
+        <>
+          <Header />
+          <main className={`theme--${theme}`}>
+            <LoginFormWithHooks />
+            <ArticleThemeWrapper />
+          </main>
+        </>
+      )}
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

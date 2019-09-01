@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useMousePressed from '../custom-hooks/mouse-pressed'
+import useMousePressed from '../hooks/mouse-pressed'
 import './index.css'
 
 function Timer () {
@@ -9,7 +9,7 @@ function Timer () {
   // Timer
   useEffect(function () {
     const timerId = setInterval(function () {
-      if (!mousePressed) {
+      if (mousePressed) {
         setMilliseconds(m => m + 1)
       }
     }, 1)
