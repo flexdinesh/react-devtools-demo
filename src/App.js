@@ -1,10 +1,13 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 import Header from "./components/Header";
 import LoginFormWithHooks from "./components/LoginForm/LoginFormWithHooks";
-import ArticleThemeWrapper from "./components/Article/ArticleWrapper";
+
+const ArticleThemeWrapper = lazy(() =>
+  import("./components/Article/ArticleWrapper")
+);
 
 function App() {
   return (
@@ -14,7 +17,9 @@ function App() {
           <Header />
           <main className={`theme--${theme}`}>
             <LoginFormWithHooks />
-            <ArticleThemeWrapper />
+            <Suspense key={"suspense"} fallback={<div>Loading...</div>}>
+              <ArticleThemeWrapper />
+            </Suspense>
           </main>
         </>
       )}
